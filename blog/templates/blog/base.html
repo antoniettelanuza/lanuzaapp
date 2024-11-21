@@ -1,0 +1,153 @@
+{% load static %}  <!-- For Django's static files -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>˚₊‧꒰ა ☆ ໒꒱ ‧₊˚</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome for icons -->
+    
+    <style>
+      @font-face {
+        font-family: 'dinkie9px';
+        src: url("https://chairfiles.vercel.app/DinkieBitmap-9px.woff2") format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'pixelmplus10';
+        src: url("https://chairfiles.vercel.app/PixelMplus10-Regular.woff2") format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      /* Apply the custom font */
+      body {
+        font-family: 'dinkie9px', sans-serif;
+        background-color: #fce0e0; /* Set background to pink */
+        color: #77dd77; /* Set text color to pastel green */
+      }
+
+      h2 {
+        font-family: 'pixelmplus10', sans-serif;
+        color: #77dd77; /* Pastel green for headings */
+      }
+
+      header {
+        background-color: #fce0e0; /* Pink background */
+        position: fixed; /* Fixed at the top */
+        top: 0;
+        left: 0;
+        width: 100%; /* Full width for dynamic fitting */
+        z-index: 1000; /* Keep above other content */
+        border-bottom: 1px solid #dcbcbc; /* Optional border */
+        padding: 10px 20px; /* Add padding for spacing */
+        margin-bottom: 10px; /* Prevent clashing with below content */
+      }
+
+      /* Custom styles for navbar alignment */
+      .nav-buttons {
+        display: flex; /* Use flexbox to align buttons horizontally */
+        justify-content: flex-end; /* Push buttons to the right */
+        gap: 10px; /* Optional: add space between buttons */
+      }
+
+      /* Navbar link styling */
+      .nav-link, .nav-buttons .btn {
+        color: #77dd77; /* Pastel green links */
+      }
+
+      .nav-link:hover, .nav-buttons .btn:hover {
+        color: #55b35c; /* Darker pastel green on hover */
+      }
+
+      /* Navbar background */
+      header {
+        background-color: #fce0e0; /* Pink background for navbar */
+      }
+
+      /* Footer link color */
+      .card-footer .card-link {
+        color: #77dd77; /* Pastel green footer links */
+      }
+
+      /* Footer link hover */
+      .card-footer .card-link:hover {
+        color: #55b35c; /* Darker pastel green on hover */
+      }
+
+      /* BUTTON STYLES */
+      .btn-outline-primary {
+        border-color: #77dd77;
+        color: #77dd77;
+      }
+
+      .btn-outline-primary:hover {
+        background-color: #77dd77;
+        color: white;
+      }
+
+      .btn-primary {
+        background-color: #77dd77;
+        border-color: #77dd77;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: #55b35c;
+        border-color: #55b35c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR-->
+    <div class="container">
+      <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4 border-bottom">
+          <div class="col-md-3 mb-2 mb-md-0">
+              <a href="{% url 'bl-home' %}" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <h2>—byte socials.</h2>
+              </a>
+          </div>
+
+        <!-- Navigation links moved next to the buttons -->
+        <div class="col-md-3 text-end">
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-primary me-2"><i class="fas fa-sign-out-alt"></i></button> <!-- Logout Icon -->
+            </form>
+            <a class="btn btn-outline-primary me-2" href="{% url 'profile' %}"><i class="fas fa-user"></i></a> <!-- Profile Icon -->
+            <a class="btn btn-outline-primary me-2" href="{% url 'bl-home' %}"><i class="fas fa-home"></i></a> <!-- Home Icon -->
+            <a class="btn btn-outline-primary me-2" href="{% url 'bl-about' %}"><i class="fas fa-info-circle"></i></a> <!-- About Icon -->
+          {% else %}
+            <a type="button" class="btn btn-outline-primary me-2" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a> <!-- Login Icon -->
+            <a type="button" class="btn btn-primary" href="{% url 'register' %}"><i class="fas fa-user-plus"></i></a> <!-- Sign-up Icon -->
+          {% endif %}
+        </div>
+      </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    {% block content %}{% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>       
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

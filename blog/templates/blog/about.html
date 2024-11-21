@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <!-- Spotify embed track -->
+            <div class="col-md-12 mb-4" style="margin-top: 100px;">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2913xXOVAIDAqxzV2g4VcU?utm_source=generator" width="65%" height="152" frameBorder="0" allowfullscreen="False" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <!-- Main About container -->
+            <div class="col-md-8">
+                <div class="about-container p-4" style="background-color: #f9f9f9; border: 1px solid #ddd;">
+                    <h2>About</h2>
+                    <p>Hi and welcome to my website {{ user.username}}! This is a website made using Python Django, and was made from the ground up and Antoniette Lanuza. If you notice, there is an embed track above of my favourite Taylor Swift song, The Bolter. I hope you enjoy!</p>
+                </div>
+            </div>
+
+            <!-- Right-side container with header and links, fixed position -->
+            <div class="col-md-4">
+                <div class="right-container" style="position: fixed; top: 100px; right: 20px; width: 350px; margin-right: 50px;">
+                    <div class="header" style="width: 100%; height: 300px; background-color: #f0f0f0; margin-bottom: 20px;">
+                        <img src="blog/1.jpg" alt="Header Image" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="links">
+                        <a href="https://www.op.gg/summoners/ph/bytewastaken-0000" class="d-block mb-2">OPGG</a>
+                        <a href="https://www.youtube.com/watch?v=6n3pFFPSlW4" class="d-block mb-2">Prize</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

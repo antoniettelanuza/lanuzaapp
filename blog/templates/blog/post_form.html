@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" style="max-width: 900px; padding: 20px; margin-top: 100px;">
+    <div class="card" style="border: 3px solid #ccc; padding: 20px;">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Create a Blog Post</legend>
+                <!-- Applying crispy forms for the fields -->
+                {{ form|crispy }}
+            </fieldset>
+            <!-- Submit and Cancel Buttons aligned to the left -->
+            <div class="d-flex justify-content-start mt-3">
+                <button class="btn btn-outline-info" type="submit" style="margin-right: 10px;">Post</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

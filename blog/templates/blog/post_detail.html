@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="container" style="max-width: 900px; padding: 20px; margin-top: 100px;">
+    <div class="card" style="border: 3px solid #ccc; padding: 20px; position: relative;">
+        <article class="media content-section">
+            <div class="d-flex">
+                <div class="profile-image-container" style="margin-right: 20px;">
+                    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" style="width: 100px; height: 100px; object-fit: cover;">
+                </div>
+                <div class="media-body">
+                    <div class="d-flex flex-column">
+                        <!-- Username and Date Section -->
+                        <a class="h4 mb-2" href="#">{{ object.author }}</a>
+                        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <h2 class="article-title" style="margin-top: 5px;">{{ object.title }}</h2>
+                    <p class="article-content">{{ object.content }}</p>
+                    
+                    <!-- Displaying the uploaded image if it exists -->
+                    {% if object.image %}
+                        <div class="post-image-container" style="margin-top: 20px;">
+                            <img src="{{ object.image.url }}" alt="{{ object.title }}" class="img-fluid" style="max-width: 100%; height: auto;">
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        
+        {% if object.author == user %}
+        <!-- Dropdown placed outside metadata container but still inside the card -->
+        <div class="dropdown" style="position: absolute; top: 20px; right: 20px;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="{% url 'post-update' object.id %}">Update</a></li>
+                <li><a class="dropdown-item" href="{% url 'post-delete' object.id %}">Delete</a></li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

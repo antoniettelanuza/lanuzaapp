@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="container" style="max-width: 900px; padding: 20px; margin-top: 100px;"> <!-- Added margin-top: 100px; -->
+    <div class="card" style="border: 3px solid #ccc; padding: 20px;"> <!-- Same card style -->
+        <article class="media content-section" style="display: flex; align-items: flex-start;">
+            <!-- Profile Image Container on the Left -->
+            <div class="profile-image-container" style="flex-shrink: 0; margin-right: 20px;"> <!-- Prevent shrinking and add margin to the right -->
+                <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" style="width: 100px; height: 100px; object-fit: cover;">
+            </div>
+            <div class="media-body" style="flex-grow: 1;">
+                <div class="article-metadata d-flex justify-content-between align-items-start">
+                    <!-- Username and Date -->
+                    <div class="d-flex flex-column">
+                        <a class="h4 mb-2" href="#">{{ object.author }}</a>
+                        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                </div>
+                <!-- Title and Content -->
+                <h2 class="article-title" style="margin-top: 5px;">Are you sure you want to delete the post titled:</h2>
+                <h3>{{ object.title }}</h3> <!-- Post Title -->
+                <p class="article-content">{{ object.content }}</p> <!-- Post Content -->
+                <p class="text-muted">This action cannot be undone.</p>
+
+                <!-- Confirmation and Cancellation Buttons on the Right -->
+                <div class="d-flex justify-content-start mt-3">
+                    <form method="POST" action="{% url 'post-delete' object.id %}" class="mr-3">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" style="margin-right: 1px;">Yes, Delete</button>
+                    </form>
+                    <a href="{% url 'post-detail' object.id %}" class="btn btn-secondary" style="margin-left: 10px;">Cancel</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock content %}
