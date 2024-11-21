@@ -1,0 +1,83 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container d-flex">
+    <!-- Container for profile image and text (name and email) below -->
+    <div class="profile-container d-flex flex-column align-items-center" style="margin-top: 100px;">
+        <div class="profile-picture-container">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="Profile Image">
+        </div>
+        <!-- Profile name and email inside the profile picture container -->
+        <div class="profile-info text-center mt-3">
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p class="text-secondary">{{ user.email }}</p>
+        </div>
+    </div>
+
+    <!-- Main content shifted to the right -->
+    <div class="content-container flex-grow-1" style="margin-left: 20px;">
+        <div class="card-body" style="margin-top: 100px;">
+
+            <!-- Success Message if Email Updated -->
+            {% if messages %}
+                <div class="alert alert-success">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Form for updating user information and profile image -->
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Section for updating profile info -->
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Profile Info</legend>
+                    {{ u_form|crispy }}  <!-- Render the user update form (email, username) -->
+
+                    <!-- Change Email button with adjusted margins -->
+                    <a href="{% url 'reset_email' %}" class="btn btn-outline-info mt-1 mb-1">Change Email</a>
+
+                    {{ p_form|crispy }}  <!-- Render the profile update form (profile image) -->
+                </fieldset>
+
+                <!-- Submit button with adjusted margins -->
+                <div class="form-group">
+                    <button class="btn btn-outline-info mt-1 mb-1" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-picture-container {
+        margin-bottom: 10px; /* Space between image and text */
+    }
+
+    .account-img {
+        width: 150px; /* Adjust size as needed */
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .profile-info h2, .profile-info p {
+        margin: 0;
+    }
+
+    .btn {
+        margin-top: 1px !important;
+        margin-bottom: 15px !important;
+    }
+</style>
+
+{% endblock content %}
